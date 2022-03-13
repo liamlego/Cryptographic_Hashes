@@ -11,7 +11,7 @@ References for SHA-1:
 
     Example Javascript code and explanation from: FullStack Academy's https://www.youtube.com/watch?v=kmHojGMUn0Q 
     
-References for SHA-2:
+References for SHA-256:
 
 
 */
@@ -65,33 +65,30 @@ unsigned int strToBinary(std::string str) {
     return num;
 }
 
-
 unsigned int leftRotate(unsigned int n, int times) {
 
-    unsigned int num = n;
+    unsigned int num = 0;
 
-    for (int i = 0; i < times; i++) {
+    unsigned int temp = (n >> 31) & 0x01;
 
-        unsigned int tempBit = (num >> 31) & 0x01;
-        for (int j = 31; j > 0; j--) {
+    int left = 31;
 
-            unsigned int bit = 0x01;
-            bit = bit << (j-1);
-            bit = bit & num;
-            bit = bit << 1;
+    for (int i = 31; i-times >= 0; i--) {
+        unsigned int bit = (n >> (i-times)) & 0x01;
+        bit = bit << i;
+        
 
-            if (((bit >> j) & 0x01) == 1) {
-                num = num | bit;
-            } else if (((num >> j) & 0x01) == 1) {
-                num = num ^ (0x01 << j);
-            }
-        }
+        num = num | bit;
 
-        if ((tempBit & 0x01) == 1) {
-            num = num | tempBit;
-        } else if ((num & 0x01) == 1) {
-            num = num ^ 0x01;
-        }
+        left--;
+    }
+
+    int index = 31;
+    for (int i = left; i >= 0; i--) {
+        unsigned int bit = (n >> (index)) & 0x01;
+        bit = bit << i;
+        num = num | bit;
+        index--;
     }
 
     return num;
