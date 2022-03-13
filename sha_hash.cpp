@@ -4,6 +4,18 @@
 #include <sstream>
 #include <iostream>
 
+/*
+
+References for SHA-1:
+    Pseudocode use from: https://en.wikipedia.org/wiki/SHA-1 
+
+    Example Javascript code and explanation from: FullStack Academy's https://www.youtube.com/watch?v=kmHojGMUn0Q 
+    
+References for SHA-2:
+
+
+*/
+
 SHA_Hash::SHA_Hash() {
 
 }
